@@ -1,6 +1,16 @@
-<h1>To-Do List</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>To-Do List</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+
+<body>
+<h1>TODO List</h1>
 <form action="/tasks" method="post">
   <input type="text" name="description" placeholder="New task" required>
+  <input type="text" name="assignee" placeholder="Assignee">
   <button type="submit">Add</button>
 </form>
 <ul>
@@ -16,4 +26,4 @@
     </li>
   {{/each}}
 </ul>
-  
+</body>
