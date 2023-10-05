@@ -1,0 +1,19 @@
+<h1>To-Do List</h1>
+<form action="/tasks" method="post">
+  <input type="text" name="description" placeholder="New task" required>
+  <button type="submit">Add</button>
+</form>
+<ul>
+  {{#each tasks}}
+    <li class="{{#if done}}done{{/if}}">
+      {{description}}
+      {{#if done}}
+        <a href="/tasks/{{id}}/undone">Undone</a>
+      {{else}}
+        <a href="/tasks/{{id}}/done">Done</a>
+      {{/if}}
+      <a href="/tasks/{{id}}/delete">Delete</a>
+    </li>
+  {{/each}}
+</ul>
+  
