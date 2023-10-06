@@ -1,12 +1,12 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #424242  ; /* Set the background color */
+  background-color: #424242; /* Set the background color */
   margin: 0;
   padding: 0;
 }
 
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   background-color: #8d8d8d;
@@ -27,7 +27,7 @@ body {
 }
 
 /* Style text input fields */
-input[type="text"] {
+input[type='text'] {
   padding: 8px;
   width: 40%; /* Adjust the width as needed */
   border: 1px solid #ccc;
@@ -36,8 +36,7 @@ input[type="text"] {
 
 .add-button,
 .delete-button,
-.done-button,
-.undone-button {
+.toggle-button {
   width: 80px; /* Adjust the width as needed */
   padding: 8px 16px; /* Maintain vertical padding */
   border: none;
@@ -54,20 +53,12 @@ input[type="text"] {
   background-color: #950000; /* Red background color for "Done" button */
 }
 
-.done-button {
+.toggle-button {
   background-color: #2ad11a;
   margin-bottom: 2px;
 }
 
-.done-button:hover {
-  background-color: #0cb300;
-}
-
-.undone-button {
-  background-color: #2ad11a;
-}
-
-.undone-button:hover {
+.toggle-button:hover {
   background-color: #0cb300;
 }
 

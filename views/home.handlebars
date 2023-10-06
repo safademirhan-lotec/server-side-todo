@@ -1,42 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>To-Do List</title>
-    <link rel="stylesheet" type="text/css" href="/styles.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
+  </head>
 
-<body>
-<h1 class="title">TODO List</h1>
-<form class="task-form" action="/tasks" method="post">
-  <input type="text" name="description" placeholder="New task" required>
-  <input type="text" name="assignee" placeholder="Assignee" required>
-  <button type="submit" class="add-button">Add</button>
-</form>
-<ul>
-  {{#each tasks}}
-    <li class="{{#if done}}done{{/if}}">
-      <span class="description">{{description}}</span>
-      <span class="asignee">{{assignee}}</span>
-      <span class="buttons">
-        {{#if done}}
-        <form class="done-form" action="/tasks/{{id}}/undone" method="post">
-          <input type="hidden" name="_method" value="DELETE">
-          <button type="submit" class="undone-button">Undone</button>
-        </form>
-        {{else}}
-          <form class="done-form" action="/tasks/{{id}}/done" method="post">
-            <input type="hidden" name="_method" value="POST">
-            <button type="submit" class="done-button">Done</button>
+  <body>
+    <h1 class="title">TODO List</h1>
+    <form class="task-form" action="/tasks" method="post">
+      <input type="text" name="description" placeholder="New task" required />
+      <input type="text" name="assignee" placeholder="Assignee" required />
+      <button type="submit" class="add-button">Add</button>
+    </form>
+    <!-- Dropdown list for filtering tasks -->
+    <select id="filter-select">
+      <option value="all">All Tasks</option>
+      <option value="done">Completed Tasks</option>
+      <option value="undone">Incomplete Tasks</option>
+    </select>
+    <ul>
+      {{#each tasks}}
+      <li class="{{#if status}}done{{/if}}">
+        <span class="description" id="description-{{ id }}">{{
+          description
+        }}</span>
+        <span class="assignee" id="assignee-{{ id }}">{{ assignee }}</span>
+        <span class="buttons">
+          <button class="edit-button" onclick="toggleEditMode({{ id }})">
+            Edit
+          </button>
+          {{#if status}}
+          <form class="done-form" action="/tasks/{{ id }}/undone" method="post">
+            <input type="hidden" name="_method" value="PUT" />
+            <button type="submit" class="toggle-button">Undone</button>
           </form>
-        {{/if}}
-        <form class="delete-form" action="/tasks/{{id}}/delete" method="post">
-          <input type="hidden" name="_method" value="DELETE">
-          <button type="submit" class="delete-button">Delete</button>
-        </form>
-      </span>
-    </li>
-  {{/each}}
-</ul>
-</body>
+          {{else}}
+          <form class="done-form" action="/tasks/{{ id }}/done" method="post">
+            <input type="hidden" name="_method" value="PUT" />
+            <button type="submit" class="toggle-button">Done</button>
+          </form>
+          {{/if}}
+          <form
+            class="delete-form"
+            action="/tasks/{{ id }}/delete"
+            method="post"
+          >
+            <input type="hidden" name="_method" value="DELETE" />
+            <button type="submit" class="delete-button">Delete</button>
+          </form>
+          <form
+            class="edit-form"
+            id="edit-form-{{ id }}"
+            style="display: none"
+            action="/tasks/{{ id }}"
+            method="post"
+          >
+            <input
+              type="text"
+              name="description"
+              id="edit-description-{{ id }}"
+              value="{{ description }}"
+            />
+            <input
+              type="text"
+              name="assignee"
+              id="edit-assignee-{{ id }}"
+              value="{{ assignee }}"
+            />
+            <!-- Other form fields -->
+            <button type="submit">Save</button>
+          </form>
+        </span>
+      </li>
+      {{/each}}
+    </ul>
+  <script src="/client.js"></script>
+  </body>
 </html>

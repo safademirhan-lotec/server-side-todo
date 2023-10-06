@@ -19,7 +19,7 @@ router.post('/tasks', async (req, res) => {
   try {
     await pool.query(
       'INSERT INTO todos (description, assignee) VALUES ($1, $2)',
-      [description, assignee]
+      [description, assignee],
     );
     res.redirect('/');
   } catch (error) {
@@ -65,20 +65,19 @@ router.post('/tasks/:id/delete', async (req, res) => {
 });
 
 // Route to update a task by ID
-router.put('/:id', async (req, res) => {
+router.post('/tasks/:id', async (req, res) => {
   const taskId = req.params.id;
   const { description, assignee } = req.body;
-
   try {
-    // Update the task in the database (you should implement this)
+    // Update the task in the database
     await pool.query(
       'UPDATE todos SET description = $1, assignee = $2 WHERE id = $3',
-      [description, assignee, taskId]
+      [description, assignee, taskId],
     );
     res.redirect('/');
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Error updating task');
+    console.error('Error updating task:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 module.exports = router;

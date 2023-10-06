@@ -13,7 +13,7 @@ app.engine(
   exphbs({
     defaultLayout: 'main',
     layoutsDir: path.join(__dirname, 'views/layouts'),
-  })
+  }),
 );
 app.set('view engine', 'handlebars');
 

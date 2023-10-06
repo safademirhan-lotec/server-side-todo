@@ -2,5 +2,13 @@
   "singleQuote": true,
   "semi": true,
   "tabWidth": 2,
-  "printWidth": 80
+  "printWidth": 80,
+  "overrides": [
+    {
+      "files": "*.handlebars",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ]
 }
