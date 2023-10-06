@@ -7,8 +7,8 @@
 </head>
 
 <body>
-<h1>TODO List</h1>
-<form action="/tasks" method="post">
+<h1 class="title">TODO List</h1>
+<form class="task-form" action="/tasks" method="post">
   <input type="text" name="description" placeholder="New task" required>
   <input type="text" name="assignee" placeholder="Assignee">
   <button type="submit">Add</button>
@@ -16,13 +16,15 @@
 <ul>
   {{#each tasks}}
     <li class="{{#if done}}done{{/if}}">
-      {{description}}
-      {{#if done}}
-        <a href="/tasks/{{id}}/undone">Undone</a>
-      {{else}}
-        <a href="/tasks/{{id}}/done">Done</a>
-      {{/if}}
-      <a href="/tasks/{{id}}/delete">Delete</a>
+      <span class="description">{{description}}</span>
+        <span class="buttons">
+          {{#if done}}
+            <a href="/tasks/{{id}}/undone">Undone</a>
+          {{else}}
+            <a href="/tasks/{{id}}/done">Done</a>
+          {{/if}}
+          <a href="/tasks/{{id}}/delete">Delete</a>
+        </span>
     </li>
   {{/each}}
 </ul>
