@@ -64,4 +64,21 @@ router.post('/tasks/:id/delete', async (req, res) => {
   }
 });
 
+// Route to update a task by ID
+router.put('/:id', async (req, res) => {
+  const taskId = req.params.id;
+  const { description, assignee } = req.body;
+
+  try {
+    // Update the task in the database (you should implement this)
+    await pool.query(
+      'UPDATE todos SET description = $1, assignee = $2 WHERE id = $3',
+      [description, assignee, taskId]
+    );
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating task');
+  }
+});
 module.exports = router;
