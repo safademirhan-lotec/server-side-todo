@@ -4,6 +4,7 @@ const path = require('path');
 const todosRouter = require('./routes/todos');
 const pool = require('./database');
 const app = express();
+const methodOverride = require('method-override');
 const port = process.env.PORT || 3000;
 
 // View engine setup using express-handlebars
@@ -17,6 +18,7 @@ app.engine(
 app.set('view engine', 'handlebars');
 
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
