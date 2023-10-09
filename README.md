@@ -42,10 +42,6 @@ The application will be accessible at `http://localhost:3000` in your web browse
 - [Express Handlebars](https://www.npmjs.com/package/express-handlebars) - View engine for rendering HTML templates
 - [PostgreSQL](https://www.postgresql.org/) - Open-source relational database management system
 
-## License
-
-This project is licensed under the ISC License - see the [LICENSE.md](LICENSE.md) file for details.
-
 ## Acknowledgments
 
 - Thanks to [OpenAI](https://www.openai.com/) for the assistance in creating this README.

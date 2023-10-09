@@ -38,3 +38,25 @@ function updateTask(taskId) {
       console.error('Error updating task:', error);
     });
 }
+
+function filterTasks() {
+  // Get the selected option
+  const selectedOption = document.getElementById('filter-select').value;
+
+  // Get all task items (list items)
+  const taskItems = document.querySelectorAll('li');
+
+  // Loop through all task items and update visibility based on the selected option
+  taskItems.forEach((taskItem) => {
+    const isDone = taskItem.classList.contains('done');
+    if (selectedOption === 'all') {
+      taskItem.style.display = 'block';
+    } else if (selectedOption === 'done' && isDone) {
+      taskItem.style.display = 'block';
+    } else if (selectedOption === 'undone' && !isDone) {
+      taskItem.style.display = 'block';
+    } else {
+      taskItem.style.display = 'none';
+    }
+  });
+}
