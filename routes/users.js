@@ -33,8 +33,8 @@ router.post('/login', async (req, res) => {
     // Check if username is in users table before comparing password
     if (user) {
       if (bcrypt.compareSync(password, user.password)) {
-        req.session.id = user.id;
-        res.redirect('/');
+        req.session.userId = user.id;
+        res.redirect('/home');
       } else {
         res.redirect('/login?error=1');
       }
@@ -47,9 +47,8 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Route to logout a user
+// Route to logout a user by destroying user session
 router.get('/logout', (req, res) => {
-  // Destroy the user session to log them out
   req.session.destroy((err) => {
     if (err) {
       console.error('Error logging out:', err);
@@ -70,27 +69,4 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-function requireAuth(req, res, next) {
-  if (req.session.id) {
-    // User is authenticated, proceed to the next middleware
-    next();
-  } else {
-    res.redirect('/login');
-  }
-}
-
-// Use the middleware to protect specific routes
-router.get('/protected-route', requireAuth, (req, res) => {
-  res.render('protected');
-});
-
-// Add a protected dashboard route
-router.get('/dashboard', (req, res) => {
-  if (req.session.id) {
-    // User is authenticated, render the dashboard
-    res.render('home');
-  } else {
-    res.redirect('/login');
-  }
-});
 module.exports = router;

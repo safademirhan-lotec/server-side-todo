@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database');
 
+// function requireAuth(req, res, next) {
+//   if (req.session.id) {
+//     // User is authenticated, proceed to the next middleware
+//     next();
+//   } else {
+//     res.redirect('/login');
+//   }
+// }
+
+// Apply requireAuth middleware to protect routes
+// router.use(requireAuth);
+
 // Route to list all tasks
 router.get('/', async (req, res) => {
   try {

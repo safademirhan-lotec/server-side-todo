@@ -34,7 +34,16 @@ app.use(
 );
 
 // Use the todosRouter for routes under /todos
-app.use('/', todosRouter);
+app.use('/home', requireAuth, todosRouter);
+
+function requireAuth(req, res, next) {
+  if (req.session.userId) {
+    // User is authenticated, proceed to the next middleware
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
 
 // Use the userRouter for routes under /users
 app.use('/', userRouter);
