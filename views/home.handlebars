@@ -7,6 +7,11 @@
   </head>
 
   <body>
+    <div class="logout-container">
+    <form class="logout-form" action="/logout" method="get">
+      <button type="submit" class="logout-button">Log Out</button>
+    </form>
+    </div>
     <h1 class="title">TODO List</h1>
     <form class="task-form" action="/tasks" method="post">
       <input type="text" name="description" placeholder="New task" required />

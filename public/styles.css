@@ -27,13 +27,17 @@ body {
 }
 
 /* Style text input fields */
-input[type='text'] {
+input[type='text'],
+input[type='password'] {
   padding: 8px;
   width: 40%; /* Adjust the width as needed */
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
+.login-button,
+.signup-button,
+.logout-button,
 .add-button,
 .delete-button,
 .toggle-button,
@@ -45,6 +49,34 @@ input[type='text'] {
   border-radius: 4px;
   color: #fff; /* Button text color */
   cursor: pointer;
+}
+
+.signup-button {
+  background-color: #2ad11a;
+}
+
+.signup-button:hover {
+  background-color: #0cb300;
+}
+
+.login-button {
+  background-color: #2ad11a;
+}
+
+.login-button:hover {
+  background-color: #0cb300;
+}
+
+.logout-button {
+  background-color: #d11a2a; /* Red background color for "Done" button */
+}
+
+.logout-button:hover {
+  background-color: #950000; /* Red background color for "Done" button */
+}
+
+.logout-container {
+  text-align: right;
 }
 
 .delete-button {

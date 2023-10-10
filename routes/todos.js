@@ -19,7 +19,7 @@ router.post('/tasks', async (req, res) => {
   try {
     await pool.query(
       'INSERT INTO todos (description, assignee) VALUES ($1, $2)',
-      [description, assignee],
+      [description, assignee]
     );
     res.redirect('/');
   } catch (error) {
@@ -72,7 +72,7 @@ router.post('/tasks/:id', async (req, res) => {
     // Update the task in the database
     await pool.query(
       'UPDATE todos SET description = $1, assignee = $2 WHERE id = $3',
-      [description, assignee, taskId],
+      [description, assignee, taskId]
     );
     res.redirect('/');
   } catch (error) {
