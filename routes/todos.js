@@ -2,10 +2,14 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database');
 
-// Route to list all tasks
+// Route to list users own tasks
 router.get('/', async (req, res) => {
+  const user_id = req.session.userId; // Get the user's ID from the session
   try {
-    const { rows } = await pool.query('SELECT * FROM todos ORDER BY id');
+    const { rows } = await pool.query(
+      'SELECT * FROM todos WHERE user_id = $1 ORDER BY id',
+      [user_id]
+    );
     res.render('home', { tasks: rows });
   } catch (error) {
     console.error('Error getting tasks:', error);
@@ -16,10 +20,11 @@ router.get('/', async (req, res) => {
 // Route to add a new task
 router.post('/tasks', async (req, res) => {
   const { description, assignee } = req.body;
+  const user_id = req.session.userId; // Get the user's ID from the session
   try {
     await pool.query(
-      'INSERT INTO todos (description, assignee) VALUES ($1, $2)',
-      [description, assignee]
+      'INSERT INTO todos (description, assignee, user_id) VALUES ($1, $2, $3)',
+      [description, assignee, user_id]
     );
     res.redirect('/home/');
   } catch (error) {
