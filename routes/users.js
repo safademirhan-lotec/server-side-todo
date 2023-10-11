@@ -13,7 +13,7 @@ router.post('/signup', async (req, res) => {
       username,
       hashedPassword,
     ]);
-    res.redirect('/');
+    res.redirect('/home');
   } catch (error) {
     console.error('Error signing up:', error);
     res.status(500).send('Internal Server Error');
