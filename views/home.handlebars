@@ -13,7 +13,7 @@
     </form>
     </div>
     <h1 class="title">TODO List</h1>
-    <form class="task-form" action="/tasks" method="post">
+    <form class="task-form" action="/home/tasks" method="post">
       <input type="text" name="description" placeholder="New task" required />
       <input type="text" name="assignee" placeholder="Assignee" required />
       <button type="submit" class="add-button">Add</button>
@@ -36,19 +36,19 @@
             Edit
           </button>
           {{#if status}}
-          <form class="done-form" action="/tasks/{{ id }}/undone" method="post">
+          <form class="done-form" action="/home/tasks/{{ id }}/undone" method="post">
             <input type="hidden" name="_method" value="PUT" />
             <button type="submit" class="toggle-button">Undone</button>
           </form>
           {{else}}
-          <form class="done-form" action="/tasks/{{ id }}/done" method="post">
+          <form class="done-form" action="/home/tasks/{{ id }}/done" method="post">
             <input type="hidden" name="_method" value="PUT" />
             <button type="submit" class="toggle-button">Done</button>
           </form>
           {{/if}}
           <form
             class="delete-form"
-            action="/tasks/{{ id }}/delete"
+            action="/home/tasks/{{ id }}/delete"
             method="post"
           >
             <input type="hidden" name="_method" value="DELETE" />
@@ -58,7 +58,7 @@
             class="edit-form"
             id="edit-form-{{ id }}"
             style="display: none"
-            action="/tasks/{{ id }}"
+            action="/home/tasks/{{ id }}"
             method="post"
           >
             <input

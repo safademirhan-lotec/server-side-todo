@@ -2,18 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../database');
 
-// function requireAuth(req, res, next) {
-//   if (req.session.id) {
-//     // User is authenticated, proceed to the next middleware
-//     next();
-//   } else {
-//     res.redirect('/login');
-//   }
-// }
-
-// Apply requireAuth middleware to protect routes
-// router.use(requireAuth);
-
 // Route to list all tasks
 router.get('/', async (req, res) => {
   try {
@@ -33,7 +21,7 @@ router.post('/tasks', async (req, res) => {
       'INSERT INTO todos (description, assignee) VALUES ($1, $2)',
       [description, assignee]
     );
-    res.redirect('/');
+    res.redirect('/home/');
   } catch (error) {
     console.error('Error adding task:', error);
     res.status(500).send('Internal Server Error');
@@ -45,7 +33,7 @@ router.post('/tasks/:id/done', async (req, res) => {
   const taskId = req.params.id;
   try {
     await pool.query('UPDATE todos SET status = true WHERE id = $1', [taskId]);
-    res.redirect('/');
+    res.redirect('/home/');
   } catch (error) {
     console.error('Error marking task as done:', error);
     res.status(500).send('Internal Server Error');
@@ -57,7 +45,7 @@ router.post('/tasks/:id/undone', async (req, res) => {
   const taskId = req.params.id;
   try {
     await pool.query('UPDATE todos SET status = false WHERE id = $1', [taskId]);
-    res.redirect('/');
+    res.redirect('/home/');
   } catch (error) {
     console.error('Error marking task as undone:', error);
     res.status(500).send('Internal Server Error');
@@ -69,7 +57,7 @@ router.post('/tasks/:id/delete', async (req, res) => {
   const taskId = req.params.id;
   try {
     await pool.query('DELETE FROM todos WHERE id = $1', [taskId]);
-    res.redirect('/');
+    res.redirect('/home/');
   } catch (error) {
     console.error('Error deleting task:', error);
     res.status(500).send('Internal Server Error');
@@ -86,7 +74,7 @@ router.post('/tasks/:id', async (req, res) => {
       'UPDATE todos SET description = $1, assignee = $2 WHERE id = $3',
       [description, assignee, taskId]
     );
-    res.redirect('/');
+    res.redirect('/home/');
   } catch (error) {
     console.error('Error updating task:', error);
     res.status(500).json({ error: 'Internal Server Error' });
