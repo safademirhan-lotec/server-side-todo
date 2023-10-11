@@ -6,7 +6,9 @@ const todosRouter = require('./routes/todos');
 const userRouter = require('./routes/users');
 const app = express();
 const methodOverride = require('method-override');
-const port = process.env.PORT || 3000;
+const dotenv = require('dotenv');
+dotenv.config();
+const port = process.env.dev_port || 3000;
 
 // View engine setup using express-handlebars
 app.engine(
